@@ -66,7 +66,7 @@ if (!board) return;
         cardContainer.appendChild(cardInner);
 
       
-        cardContainer.addEventListener('click', () => handleMove(cardContainer, num));
+        cardContainer.addEventListener('click', () => clicksRight(cardContainer, num));
         
       
         board.appendChild(cardContainer);
@@ -79,6 +79,36 @@ const startTimer = () => {
         if (timerDisplay) timerDisplay.textContent = gameState.timer;
     }, 1000);
 };
+
+
+const clicksRight = (cardEl, val) => {
+    const inner = cardEl.querySelector('.card-inner');
+    if (inner.classList.contains('is-flipped')) return;
+
+    inner.classList.add('is-flipped');
+
+    if (val === gameState.expected) {
+        gameState.expected += (gameState.level === 'easy' ? 1 : 2);
+        if (gameState.expected > 15) handleWin();
+    } else {
+        gameState.tries++;
+        const triesDisplay = document.querySelector('#tries');
+        if (triesDisplay) triesDisplay.textContent = gameState.tries;
+        
+        // טעות - הפיכה חזרה לאחר השהייה
+        setTimeout(() => {
+            document.querySelectorAll('.is-flipped').forEach(c => c.classList.remove('is-flipped'));
+            gameState.expected = (gameState.level === 'easy' ? 1 : 2);
+        }, 800);
+    }
+};
+
+
+
+
+
+
+
 const showScoresModal = () => {
     const modal = document.getElementById('score-modal');
     const tbody = document.getElementById('scores-body');
@@ -116,3 +146,5 @@ row.appendChild(triesCell);
 
    
 };
+//פונקצית ניצחון
+//
