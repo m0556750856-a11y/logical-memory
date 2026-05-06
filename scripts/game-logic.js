@@ -79,3 +79,40 @@ const startTimer = () => {
         if (timerDisplay) timerDisplay.textContent = gameState.timer;
     }, 1000);
 };
+const showScoresModal = () => {
+    const modal = document.getElementById('score-modal');
+    const tbody = document.getElementById('scores-body');
+    if (!tbody) return;
+
+    const scores = JSON.parse(localStorage.getItem('highScores')) || [];
+    
+    // ניקוי הטבלה בלי innerhtml=' ' שינתי
+    while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+    }
+
+    scores.forEach(s => {
+        const row = document.createElement('tr');
+
+        const nameCell = document.createElement('td');
+        nameCell.textContent = s.name;
+        
+      const timeCell = document.createElement('td');
+timeCell.textContent = `${s.time} ש'`; 
+
+const levelCell = document.createElement('td');
+levelCell.textContent = (s.level === 'easy' ? 'רגיל' : 'זוגי');
+
+const triesCell = document.createElement('td');
+triesCell.textContent = s.tries; 
+
+
+row.appendChild(nameCell);
+row.appendChild(timeCell);
+row.appendChild(levelCell);
+row.appendChild(triesCell); 
+        tbody.appendChild(row);
+    });
+
+   
+};
