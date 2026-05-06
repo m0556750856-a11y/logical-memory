@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>משחק זיכרון - לוח המשחק</title>
+      <script type="module" src="../scripts/game-logic.js" defer></script>
 </head>
 <body>
     
@@ -13,7 +14,25 @@
             <div>ניסיונות: <span id="tries">0</span></div>
         </div>
     </header>
-
+ <main id="game-board" class="board-container">hhhhhhhhhhhhhh</main>
     
+ <div id="score-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>כל הכבוד!</h2>
+            <div id="modal-table-container">
+                <table class="styled-table">
+                    <thead>
+                        <tr><th>שם</th><th>זמן</th><th>רמה</th><tr>כמות נסיונות</tr></tr>
+                    </thead>
+                    <tbody id="scores-body"></tbody>
+                </table>
+            </div>
+            <button class="action-btn" onclick="location.href='../index.html'">חזרה לתפריט</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>כל הזכויות שמורות &copy; מלכה שטרן - תשפ"ו</p>
+    </footer>
 </body>
 </html>

@@ -23,3 +23,47 @@ numbers.sort(() => Math.random - 0.5);
 
 
 } 
+
+//פונקציה שיוצרת את הקלפים
+const renderBoard = (numbers) => {
+const board= document.querySelector(game-board);
+if (!board) return;
+
+
+ numbers.forEach(num => {
+      
+        const cardContainer = document.createElement('div');
+        cardContainer.className = 'card-container';
+
+       
+        const cardInner = document.createElement('div');
+        cardInner.className = 'card-inner';
+
+    
+        const cardFront = document.createElement('div');
+        cardFront.className = 'card-front';
+        const frontImg = document.createElement('img');
+        frontImg.src = `../images/${num}.png`;
+        frontImg.alt = `מספר ${num}`;
+        cardFront.appendChild(frontImg);
+
+        
+        const cardBack = document.createElement('div');
+        cardBack.className = 'card-back';
+        const backImg = document.createElement('img');
+        backImg.src = '../images/back.png';
+        backImg.alt = 'גב קלף';
+        cardBack.appendChild(backImg);
+
+      
+        cardInner.appendChild(cardFront);
+        cardInner.appendChild(cardBack);
+        cardContainer.appendChild(cardInner);
+
+      
+        cardContainer.addEventListener('click', () => handleMove(cardContainer, num));
+        
+      
+        board.appendChild(cardContainer);
+    });
+}
