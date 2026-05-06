@@ -19,7 +19,9 @@ else
 //מערבבת
 numbers.sort(() => Math.random - 0.5);
 //אני צריכה להשים פונקציה שתיצור את הקלפים
-//ןלהתחיל את ספירת הזמן
+renderBoard(numbers);
+//להתחיל את ספירת הזמן
+startTimer();
 
 
 } 
@@ -70,3 +72,10 @@ if (!board) return;
         board.appendChild(cardContainer);
     });
 }
+const startTimer = () => {
+    gameState.interval = setInterval(() => {
+        gameState.timer++;
+        const timerDisplay = document.querySelector('#timer');
+        if (timerDisplay) timerDisplay.textContent = gameState.timer;
+    }, 1000);
+};
