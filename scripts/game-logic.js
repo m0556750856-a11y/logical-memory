@@ -29,7 +29,10 @@ const renderBoard = (numbers) => {
 const board= document.querySelector(game-board);
 if (!board) return;
 
-
+ // ניקוי הלוח בצורה בטוחה
+    while (board.firstChild) {
+        board.removeChild(board.firstChild);
+    }
  numbers.forEach(num => {
       
         const cardContainer = document.createElement('div');
