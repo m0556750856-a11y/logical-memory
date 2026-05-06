@@ -1,9 +1,13 @@
+//modal----------
+
+
 const gameState=
 {
     expected: 0,   
     timer: 0,
     tries: 0,
-  level: new URLSearchParams(window.location.search).get('level') || 'easy'
+  level: new URLSearchParams(window.location.search).get('level') || 'easy',
+   playerName: localStorage.getItem('playerName') || 'שחקן'
 
 }
 //1--------------------------------
