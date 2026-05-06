@@ -6,7 +6,7 @@ const gameState=
   level: new URLSearchParams(window.location.search).get('level') || 'easy'
 
 }
-
+//1--------------------------------
 const initGame = () => {
     let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
  if(gameState.level==='easy' ){
@@ -25,7 +25,7 @@ startTimer();
 
 
 } 
-
+//2-----------------------------------------
 //פונקציה שיוצרת את הקלפים
 const renderBoard = (numbers) => {
 const board= document.querySelector(game-board);
@@ -72,6 +72,7 @@ if (!board) return;
         board.appendChild(cardContainer);
     });
 }
+//3-----------------------------------------------
 const startTimer = () => {
     gameState.interval = setInterval(() => {
         gameState.timer++;
@@ -79,6 +80,51 @@ const startTimer = () => {
         if (timerDisplay) timerDisplay.textContent = gameState.timer;
     }, 1000);
 };
+
+//4------------------------------------------------------------------
+const handleWin = () => {
+    // יצירת אובייקט שמע חדש עם הנתיב לקובץ
+    const winAudio = new Audio('../assets/מנצח.mp3'); 
+    
+    // הפעלת המנגינה
+    winAudio.play();
+
+    // שאר לוגיקת הניצחון שלך
+    clearInterval(gameState.interval);
+    saveScore(gameState.playerName, gameState.timer, gameState.level,gameState.tries);
+    showScoresModal();
+};
+//5----------------------------------------------------------------------
+const clicksRight = (cardEl, val) => {
+    const inner = cardEl.querySelector('.card-inner');
+    if (inner.classList.contains('is-flipped')) return;
+
+    inner.classList.add('is-flipped');
+
+    if (val === gameState.expected) {
+        gameState.expected += (gameState.level === 'easy' ? 1 : 2);
+        if (gameState.expected > 15) handleWin();
+    } else {
+        gameState.tries++;
+        const triesDisplay = document.querySelector('#tries');
+        if (triesDisplay) triesDisplay.textContent = gameState.tries;
+        
+        // טעות - הפיכה חזרה לאחר השהייה
+        setTimeout(() => {
+            document.querySelectorAll('.is-flipped').forEach(c => c.classList.remove('is-flipped'));
+            gameState.expected = (gameState.level === 'easy' ? 1 : 2);
+        }, 800);
+    }
+};
+
+//הדפדפן יסתיים ואז הפונ יתחילו ועישיתi -זה לא טוב nitGame(); 
+
+document.addEventListener('DOMContentLoaded', initGame);
+
+
+
+
+
 
 
 const clicksRight = (cardEl, val) => {
