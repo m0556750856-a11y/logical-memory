@@ -3,40 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>משחק הזיכרון - סדרות</title>
+    <title>משחק הזיכרון הסדרתי</title>
+
+
+<link rel="icon" type="image/png" href="images/favicon.png">
+
+
+
+
+    <link rel="stylesheet" href="styles/main-style.css">
+
+    <!-- שימוש ב-type="module" מאפשר ייבוא וייצוא של פונקציות בין קבצים -->
+    <script type="module" src="scripts/main.js" defer></script>
+     <script type="module" src="scripts/storage-manager.js" defer></script>
+     
 </head>
 <body>
-     <div class="container">
- <header>
+    <div class="container">
+        <header>
             <h1>ברוכים הבאים למשחק הזיכרון</h1>
         </header>
 
-  <main>
+        <main>
             <form id="login-form">
                 <label for="username">שם שחקן:</label>
                 <input type="text" id="username" placeholder="הכנס שם..." required>
                 <button type="submit">המשך לבחירת רמה</button>
             </form>
+
             <nav>
-            <button type="button" id="open-instructions" class="action-btn" >הוראות משחק</button>    
+                <!-- כפתור שפותח את חלונית ההוראות במקום לעבור דף -->
+                <button type="button" id="open-instructions" class="action-btn" style="margin-top: 20px;">הוראות משחק</button>
+                <button id="show-scores-btn" class="menu-btn">צפה בשיאים</button>
             </nav>
         </main>
-     </div>
 
-
-             <div id="instructions-modal" class="modal-overlay">
+        <!-- מבנה המודאל (חלונית קופצת) עבור ההוראות -->
+        <div id="instructions-modal" class="modal-overlay">
             <div class="modal-content">
                 <span class="close-modal" id="close-instructions">&times;</span>
                 <h2>🎮 איך משחקים?</h2>
                 
-                <div class="instructions-body">
+                <div class="instructions-body" style="text-align: right; margin: 20px 0;">
                     <h3>מטרת המשחק:</h3>
                     <p>עליכם לחשוף את כל הקלפים שעל הלוח לפי סדר עולה מדויק ובזמן הקצר ביותר.</p>
                     
                     <h3>🛠️ רמות קושי:</h3>
-                    <ul>
-                        <li><strong>רמה רגילה:</strong> חשיפת המספרים מ-1 עד 15 לפי הסדר.</li>
-                        <li><strong>רמת אתגר:</strong> חשיפת מספרים זוגיים בלבד (2, 4, 6... עד 14).</li>
+                    <ul> 
+                      <li><strong>רמת רגילה:</strong> חשיפת מספרים זוגיים בלבד (2, 4, 6... עד 14).</li>
+                        <li><strong>רמה אתגר:</strong> חשיפת המספרים מ-1 עד 15 לפי הסדר.</li>
+                     
                     </ul>
 
                     <h3>📜 חוקי המשחק:</h3>
@@ -53,6 +69,31 @@
     </div>
 
 
+
+
+<div id="score-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <span id="close-modal" class="close-btn">&times;</span>
+        <h2>טבלת שיאים</h2>
+        <div id="modal-table-container">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>שם</th>
+                        <th>זמן</th>
+                        <th>רמה</th>
+                        <th>נסיונות</th>
+                    </tr>
+                </thead>
+                <tbody id="scores-body"></tbody>
+            </table>
+        </div>
+        <button class="action-btn" id="hide-modal-btn">סגור</button>
+    </div>
+</div>
+
+
+    <!-- פוטר שיופיע בכל העמודים -->
     <footer>
         <p>כל הזכויות שמורות &copy; מלכה שטרן - תשפ"ו</p>
     </footer>
